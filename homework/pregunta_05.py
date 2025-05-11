@@ -48,5 +48,5 @@ def pregunta_05():
     
     return lista
 
-if __name__ == '__main__':
-    print(pregunta_05())
+# if __name__ == '__main__':
+#     print(pregunta_05())

@@ -27,3 +27,40 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    # Diccionario para almacenar los números y sus letras asociadas
+    numero_letras = {}
+    
+    with open('files/input/data.csv', 'r') as file:
+        for line in file:
+            line = line.strip()
+            if not line:
+                continue
+                
+            # Dividir la línea por tabulaciones
+            campos = line.split('\t')
+            
+            # Verificar que hay suficientes columnas
+            if len(campos) >= 2:  # Necesitamos al menos 2 columnas
+                letra = campos[0]          # Primera columna - letra
+                numero = int(campos[1])    # Segunda columna - número (convertido a entero)
+                
+                # Si el número ya está en el diccionario, agregamos la letra a su lista
+                if numero in numero_letras:
+                    if letra not in numero_letras[numero]:
+                        # Solo agregamos la letra si no está ya en la lista
+                        numero_letras[numero].append(letra)
+                else:
+                    # Si no está, inicializamos una nueva lista con esta letra
+                    numero_letras[numero] = [letra]
+    
+    # Convertir el diccionario a una lista de tuplas
+    resultado = []
+    for numero in sorted(numero_letras.keys()):  # Ordenamos por número
+        # Ordenar alfabéticamente las letras antes de agregar al resultado
+        numero_letras[numero].sort()  # Esta es la línea que falta en tu código
+        resultado.append((numero, numero_letras[numero]))
+    
+    return resultado
+
+# if __name__ == '__main__':
+#     print(pregunta_08())
